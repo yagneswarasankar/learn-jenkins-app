@@ -1,14 +1,15 @@
 pipeline {
     agent any
     stages {
-        stage('Hello') {
-            agent{
-                docker{
+        stage('Build app') {
+            agent {
+                docker {
                     image 'node:18-alpine'
                     reuseNode true
                 }
             }
-            steps {'''
+            steps {
+            sh '''
             ls -la
             node --version
             npm --version
