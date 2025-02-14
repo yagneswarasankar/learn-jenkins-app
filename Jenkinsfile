@@ -74,6 +74,8 @@ pipeline {
                         }
                     }
                 }
+            }
+        }
 
 
         stage('Deploy staging') {
@@ -179,5 +181,4 @@ pipeline {
 
                }
         }
-}
 }
