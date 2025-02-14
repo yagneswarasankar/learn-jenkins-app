@@ -51,7 +51,7 @@ pipeline {
                     }
                 }
 
-                stage('E2E') {
+        stage('E2E') {
                     agent {
                         docker {
                             image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
@@ -74,8 +74,8 @@ pipeline {
                         }
                     }
                 }
-            }
-        }
+
+
         stage('Deploy staging') {
                     agent {
                         docker {
@@ -97,7 +97,7 @@ pipeline {
                     env.STAGING_URL = sh(script:"node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json", returnStdout: true)
                     }
                 }
-                stage('staging E2E') {
+        stage('staging E2E') {
                             agent {
                                 docker {
                                     image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
