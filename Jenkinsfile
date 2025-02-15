@@ -94,8 +94,8 @@ pipeline {
                             node_modules/.bin/netlify deploy --dir=build --json > deploy-output.json
                         '''
                         script {
-                                                env.STAGING_URL = sh(script:"node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json", returnStdout: true)
-                                            }
+                            env.STAGING_URL = sh(script:"node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json", returnStdout: true)
+                          }
                     }
 
                 }
@@ -125,38 +125,31 @@ pipeline {
 
     }
         stage('Approval') {
-//                             agent {
-//                                 docker {
-//                                     image 'node:18-alpine'
-//                                     reuseNode true
-//                                 }
-//                             }
-                            steps {
-                            timeout(time: 15, unit: 'MINUTES') {
-                                    input message: 'Do you wish to deploy to production?', ok: 'Yes, I am sure!'
-                            }
+               steps {
+                  timeout(time: 15, unit: 'MINUTES') {
+                  input message: 'Do you wish to deploy to production?', ok: 'Yes, I am sure!'
+                      }
+                 }
+        }
+//         stage('Deploy prod') {
+//                     agent {
+//                         docker {
+//                             image 'node:18-alpine'
+//                             reuseNode true
+//                         }
+//                     }
+//                     steps {
+//                         sh '''
+//                             npm install netlify-cli
+//                             node_modules/.bin/netlify --version
+//                             echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
+//                             node_modules/.bin/netlify status
+//                             node_modules/.bin/netlify deploy --dir=build --prod
+//                         '''
+//                     }
+//                 }
 
-                            }
-                        }
-        stage('Deploy prod') {
-                    agent {
-                        docker {
-                            image 'node:18-alpine'
-                            reuseNode true
-                        }
-                    }
-                    steps {
-                        sh '''
-                            npm install netlify-cli
-                            node_modules/.bin/netlify --version
-                            echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
-                            node_modules/.bin/netlify status
-                            node_modules/.bin/netlify deploy --dir=build --prod
-                        '''
-                    }
-                }
-
-        stage('Prod E2E') {
+        stage(Deploy prod') {
                             agent {
                                 docker {
                                     image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
@@ -170,6 +163,12 @@ pipeline {
 
                             steps {
                                 sh '''
+                                    node --version
+                                    npm install netlify-cli
+                                    node_modules/.bin/netlify --version
+                                    echo "Deploying to production. Site ID: $NETLIFY_SITE_ID"
+                                    node_modules/.bin/netlify status
+                                    node_modules/.bin/netlify deploy --dir=build --prod
                                     npx playwright test  --reporter=html
                                 '''
                             }
