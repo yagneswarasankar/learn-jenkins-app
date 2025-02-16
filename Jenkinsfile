@@ -9,12 +9,7 @@ pipeline {
 
     stages {
 
-        stage('docker build'){
-        steps{
-              sh 'docker build -t my-playwrite .'
-            }
-        }
-        stage('Build') {
+       stage('Build') {
             agent {
                 docker {
                     image 'node:18-alpine'
