@@ -135,5 +135,16 @@ pipeline {
                             }
                         }
                     }
+    stage("execute java"){
+         agent{
+                docker {
+                    image: 'oraclelinux:8'
+                    }
+                }
+                steps{
+                sh 'java docker_test.java'
+                }
+            }
+
         }
 }
