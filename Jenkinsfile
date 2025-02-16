@@ -114,18 +114,18 @@ pipeline {
 
 
                }
-        stage('Approval') {
-               steps {
-                  timeout(time: 15, unit: 'MINUTES') {
-                  input message: 'Do you wish to deploy to production?', ok: 'Yes, I am sure!'
-                      }
-                 }
-        }
+//         stage('Approval') {
+//                steps {
+//                   timeout(time: 15, unit: 'MINUTES') {
+//                   input message: 'Do you wish to deploy to production?', ok: 'Yes, I am sure!'
+//                       }
+//                  }
+//         }
 
     stage('Deploy prod') {
                 agent {
                    docker {
-                     image 'npm install netlify-cli node-jq'
+                     image 'my-playwrite'
                      reuseNode true
                            }
                    }
