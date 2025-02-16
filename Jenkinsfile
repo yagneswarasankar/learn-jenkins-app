@@ -138,7 +138,7 @@ pipeline {
     stage("execute java"){
          agent{
                 docker {
-                    image: 'oraclelinux:8'
+                    image 'oraclelinux:8'
                     }
                 }
                 steps{
