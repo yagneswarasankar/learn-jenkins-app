@@ -61,15 +61,14 @@ pipeline {
         stage('E2E') {
                     agent {
                         docker {
-                            image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                            image 'my-playwrite'
                             reuseNode true
                         }
                     }
 
                     steps {
                         sh '''
-                            npm install serve
-                            node_modules/.bin/serve -s build &
+                            serve -s build &
                             sleep 10
                             npx playwright test --reporter=html
                         '''
@@ -114,13 +113,6 @@ pipeline {
 
 
                }
-//         stage('Approval') {
-//                steps {
-//                   timeout(time: 15, unit: 'MINUTES') {
-//                   input message: 'Do you wish to deploy to production?', ok: 'Yes, I am sure!'
-//                       }
-//                  }
-//         }
 
     stage('Deploy prod') {
                 agent {
