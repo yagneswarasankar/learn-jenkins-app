@@ -37,15 +37,15 @@ pipeline {
             agent {
                 docker{
                     image 'amazon/aws-cli'
-                    reuseNode true
                     args "--entrypoint=''"
+                    euseNode true
                 }
             }
 
             steps {
                 withCredentials([usernamePassword(credentialsId: 'my-aws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
                 sh '''
-                aws s3 sync deploy s3://$AWS_S3_BUCKET_NAME/
+                aws s3 sync build s3://$AWS_S3_BUCKET_NAME/
                 '''
                     }
                
