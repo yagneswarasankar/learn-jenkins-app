@@ -14,7 +14,6 @@ pipeline {
                     image 'amazon/aws-cli'
                     reuseNode true
                     args "--entrypoint=''"
-
                 }
             }
 
