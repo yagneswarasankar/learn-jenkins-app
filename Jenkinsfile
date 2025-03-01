@@ -24,7 +24,7 @@ pipeline {
                 chmod 777 aws/task-definition-prod.json
                 cat ./aws/task-definition-prod.json
                 aws --version
-                aws ecs update-service d --cluster LearningJenkins-Cluster-Prod --service LearningJenkinsApp-Service-Prod  --task-definition LearnJenkinsApp-TaskDefinition-Prod:1
+                aws ecs update-service --cluster LearningJenkins-Cluster-Prod --service LearningJenkinsApp-Service-Prod  --task-definition LearnJenkinsApp-TaskDefinition-Prod:1
                 '''
                     }
                
