@@ -22,7 +22,7 @@ pipeline {
                 sh '''
                 ls -lrt
                 chmod 777 aws/task-definition-prod.json
-                cat aws/task-definition-prod.json
+                cat file://aws/task-definition-prod.json
                 aws --version
                 aws ecs register-task-definition --cli-input-json file://aws/task-definition-prod.json
                 '''
