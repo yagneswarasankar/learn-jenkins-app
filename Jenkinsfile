@@ -21,6 +21,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'my-aws', passwordVariable: 'AWS_SECRET_ACCESS_KEY', usernameVariable: 'AWS_ACCESS_KEY_ID')]) {
                 sh '''
                 ls -lrt
+                chmod 777 aws/task-definition-prod.json
                 aws --version
                 aws ecs register-task-definition --cli-input-json file://aws/task-definition-prod.json
                 '''
