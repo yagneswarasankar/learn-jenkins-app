@@ -24,7 +24,7 @@ pipeline {
                 chmod 777 aws/task-definition-prod.json
                 cat ./aws/task-definition-prod.json
                 aws --version
-                aws ecs register-task-definition --cli-input-json file://aws/task-definition-prod.json
+                aws ecs update-service d --cluster LearningJenkins-Cluster-Prod --service LearningJenkinsApp-Service-Prod  --task-definition LearnJenkinsApp-TaskDefinition-Prod:1
                 '''
                     }
                
@@ -32,6 +32,7 @@ pipeline {
         }
 
        stage('Build') {
+
             agent {
                 docker {
                     image 'node:18-alpine'
