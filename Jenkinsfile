@@ -39,7 +39,7 @@ pipeline {
               sh 'docker build  -t myjenkinsapp .'
             }
         }
-        }
+        
 
         stage('AWS') {
 
