@@ -40,7 +40,7 @@ pipeline {
                 }
             }
             steps{
-                sh '''aws-linux-extras install docker
+                sh '''amazon-linux-extras install docker
                 docker build  -t myjenkinsapp .
                 '''
             }
