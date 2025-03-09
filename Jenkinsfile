@@ -4,16 +4,13 @@ pipeline {
     environment {
         REACT_APP_VERSION = "1.0.$BUILD_ID"
         AWS_DEFAULT_REGION='us-east-1'
-        AWS_ECS_SERVICE_NAME='LearnJenkins-Service-Prod'
-        AWS_ECS_CLUSTER_NAME='LearnJenkins-Cluster-Prod'
+        AWS_ECS_SERVICE_NAME='LearnJenkinsApp-Service-Prod'
+        AWS_ECS_CLUSTER_NAME='LearnJenkinsApp-Cluster-Prod'
         AWS_ECS_TASK_DEFINITION='LearnJenkinsApp-TaskDefinition-Prod'
     }
 
     stages {
-
-        
-
-       stage('Build') {
+               stage('Build') {
 
             agent {
                 docker {
@@ -39,8 +36,6 @@ pipeline {
               sh 'docker build  -t myjenkinsapp .'
             }
         }
-        
-
         stage('AWS') {
 
             agent {
